@@ -13,3 +13,7 @@ from googleapiclient.discovery import build
 # タスクを確認する
 # タスクを削除する
 # カレンダーを複数登録する
+
+# 確認すること
+# カレンダーごとにAuthをする必要があるのかどうか
+
