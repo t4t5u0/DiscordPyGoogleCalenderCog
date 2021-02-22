@@ -1,6 +1,7 @@
 import datetime
 import os.path
 import pickle
+from pprint import pprint
 
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -50,17 +51,49 @@ def main():
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
     print('Getting the upcoming 10 events')
-    events_result = service.events().list(calendarId='primary', timeMin=now,
-                                          maxResults=10, singleEvents=True,
-                                          orderBy='startTime').execute()
-    events = events_result.get('items', [])
+    events_result = service.events().list(calendarId="85th9cmqi2p3sf66kh60iqls6c@group.calendar.google.com", timeMin=now,
+                                        maxResults=10, singleEvents=True,
+                                        orderBy='startTime').execute()
+    # events_result = service.events().list(calendarId='primary', timeMin=now,
+    #                                       maxResults=10, singleEvents=True,
+    #                                       orderBy='startTime').execute()
+    _events = events_result.get('items', [])
 
-    if not events:
+    if not _events:
         print('No upcoming events found.')
-    for event in events:
+    for event in _events:
         start = event['start'].get('dateTime', event['start'].get('date'))
         print(start, event['summary'])
 
+    page_token = None
+    while True:
+        events = service.events().list(calendarId='85th9cmqi2p3sf66kh60iqls6c@group.calendar.google.com', pageToken=page_token).execute()
+        for event in events['items']:
+            pprint(event)
+        page_token = events.get('nextPageToken')
+        if not page_token:
+            break
 
 if __name__ == '__main__':
     main()
+
+
+# {
+#    "kind": "calendar#calendarListEntry",
+#    "etag": "\"1614023106785000\"",
+#    "id": "85th9cmqi2p3sf66kh60iqls6c@group.calendar.google.com",
+#    "summary": "test",
+#    "description": "GoogleCalendarDiscordBot 用",
+#    "timeZone": "Asia/Tokyo",
+#    "colorId": "19",
+#    "backgroundColor": "#c2c2c2",
+#    "foregroundColor": "#000000",
+#    "selected": true,
+#    "accessRole": "owner",
+#    "defaultReminders": [],
+#    "conferenceProperties": {
+#     "allowedConferenceSolutionTypes": [
+#      "hangoutsMeet"
+#     ]
+#    }
+# }
