@@ -5,7 +5,6 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
 
-
 class UserHelp(commands.DefaultHelpCommand):
     def __init__(self):
         super().__init__()
@@ -29,7 +28,7 @@ TOKEN = config['TOKEN']['token']
 
 prefix = '/'
 bot = Bot(command_prefix=prefix, help_command=UserHelp())
-# bot.load_extension('cog.arxiv_check')
+bot.load_extension('cog.GoogleCalendarCog')
 
 
 if __name__ == "__main__":
