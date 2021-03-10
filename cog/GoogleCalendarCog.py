@@ -24,6 +24,7 @@ class GoogleCalendarCog(commands.Cog, name="googlecalender"):
     @commands.command()
     async def gcreg(self, ctx: commands.Context, link):
         """登録処理"""
+        # URL -> id はスクレイピングするしかない？
 
     @commands.command()
     async def gcadd(self, ctx: commands.Context, *args):
