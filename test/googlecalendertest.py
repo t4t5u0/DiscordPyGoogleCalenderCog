@@ -49,7 +49,6 @@ def main():
             pickle.dump(creds, token)
 
     service: Resource = build('calendar', 'v3', credentials=creds)
-    if not 
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
     print('Getting the upcoming 10 events')
