@@ -8,6 +8,11 @@ from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
+# 優先して実装するもの
+# カレンダーをテスト用に決め打ちして
+# 予定を登録
+# 予定を確認
+# 予定を削除
 
 class GoogleCalendarCog(commands.Cog, name="googlecalender"):
     def __init__(self, bot: commands.Bot):
